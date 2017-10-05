@@ -1,0 +1,17 @@
+Song Model
+==============
+see API
+Title
+User ID --belongs to and has many users
+Group ID --belongs to group through user
+
+
+Group Model
+===============
+User ID -- has many users
+Name
+
+User Model
+================
+Username
+Password
