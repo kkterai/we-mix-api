@@ -3,9 +3,8 @@ Song Model
 see API
 Title: string
 Artist: string
-Genre: string
-Streaming URL: string
-Group ID: number -- belongs to and has many groups
+Spotify URL: string
+Mix ID: number -- belongs to and has many mixes
 
 Song_mix Model
 ===============
@@ -15,24 +14,16 @@ mix ID: number
 Mix Model
 ===============
 Name: string
-
-Mix_Teams
-===============
-mix ID: number
 user ID: number
-
 
 User Model
 ================
 Username
 Password
 
-
-- Users have many Mixes through Mix_Teams
-    * Users can: Create Mixes, Read Mixes (Index, Show), Update Mix Names, Add Friends
-- Users have many Mix_Teams
-    * Within a Mix_Team, Users can add Songs, Delete songs
-- Mixes have many Songs through Song_Mixes
-- Mixes have many Song_Mixes
-- Mixes have many Mix_Teams
-- Mixes have many team members through Mix_Teams
+- Users have many Mixes 
+    * Users can: Create Mixes, Read Mixes (Index, Show), Update Mix Names
+- Mixes have many Songs through Song_mixes
+- Mixes have many Song_mixes
+- Songs belong to and have many mixes
+- Songs have many Song_mixes
