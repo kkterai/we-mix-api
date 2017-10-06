@@ -1,17 +1,38 @@
 Song Model
 ==============
 see API
-Title
-User ID --belongs to and has many users
-Group ID --belongs to group through user
+Title: string
+Artist: string
+Genre: string
+Streaming URL: string
+Group ID: number -- belongs to and has many groups
 
-
-Group Model
+Song_mix Model
 ===============
-User ID -- has many users
-Name
+song ID: number
+mix ID: number
+
+Mix Model
+===============
+Name: string
+
+Mix_Teams
+===============
+mix ID: number
+user ID: number
+
 
 User Model
 ================
 Username
 Password
+
+
+- Users have many Mixes through Mix_Teams
+    * Users can: Create Mixes, Read Mixes (Index, Show), Update Mix Names, Add Friends
+- Users have many Mix_Teams
+    * Within a Mix_Team, Users can add Songs, Delete songs
+- Mixes have many Songs through Song_Mixes
+- Mixes have many Song_Mixes
+- Mixes have many Mix_Teams
+- Mixes have many team members through Mix_Teams
