@@ -39,7 +39,7 @@ RSpec.configure do |config|
   FactoryGirl::Syntax::Methods
 
   #For Request Tests (E2E)
-  config.include REquestSpecHelper, type: :request # <- Important!
+  config.include RequestSpecHelper, type: :request # <- Important!
 
   #Setup Database Cleaner to run before the test suite and to run after each test
   config.before(:suite) do

@@ -1,20 +1,19 @@
 Song Model
 ==============
-see API
 Title: string
 Artist: string
-Spotify URL: string
-Mix ID: number -- belongs to and has many mixes
+Song_URL: string
+Mix_ID: number 
 
 Song_mix Model
 ===============
-song ID: number
-mix ID: number
+song_ID: number
+mix_ID: number
 
 Mix Model
 ===============
 Name: string
-user ID: number
+user_ID: number
 
 User Model
 ================
@@ -27,3 +26,4 @@ Password
 - Mixes have many Song_mixes
 - Songs belong to and have many mixes
 - Songs have many Song_mixes
+
