@@ -1,29 +1,29 @@
-Song Model
+Video Model
 ==============
-Title: string
-Artist: string
-Song_URL: string
-Mix_ID: number 
+title: string
+artist: string
+video_URL: string
+playlist_ID: number 
 
-Song_mix Model
+video_playlist Model
 ===============
-song_ID: number
-mix_ID: number
+video_ID: number
+playlist_ID: number
 
-Mix Model
+playlist Model
 ===============
-Name: string
+name: string
 user_ID: number
 
 User Model
 ================
-Username
-Password
+username
+password
 
-- Users have many Mixes 
-    * Users can: Create Mixes, Read Mixes (Index, Show), Update Mix Names
-- Mixes have many Songs through Song_mixes
-- Mixes have many Song_mixes
-- Songs belong to and have many mixes
-- Songs have many Song_mixes
+- Users have many Playlists 
+    * Users can: Create playlists, Read playlists (Index, Show), Update playlist Names
+- playlists have many videos through video_playlists
+- playlists have many video_playlists
+- videos belong to and have many playlists
+- videos have many video_playlists
 
