@@ -1,9 +1,15 @@
 Video Model
 ==============
-title: string
-artist: string
 video_URL: string
-playlist_ID: number 
+track_title: string
+track_ID: integer
+artist: string
+artist_ID: integer
+album: string
+album_ID: integer
+album_thumb: string
+playlist_ID: number
+mood: string
 
 video_playlist Model
 ===============
