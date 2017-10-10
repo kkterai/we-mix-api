@@ -16,12 +16,17 @@ gem 'puma', '~> 3.7'
 gem 'active_model_serializers', '~> 0.10.0'
 
 gem 'bcrypt', '~> 3.1', '>= 3.1.11'
+
+# Use JWT for handling authentication with Tokens
+gem 'jwt', '~>1.5.6'
+
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'pry'
   gem 'rspec-rails', '~> 3.5'
   gem 'dotenv-rails'
 end
