@@ -1,3 +1,3 @@
-class RequestSpecHelper
+module RequestSpecHelper
     
 end

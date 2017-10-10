@@ -11,4 +11,8 @@ class Api::V1::VideosController < ApplicationController
         end
     end
 
+    def show
+
+    end
+
 end
