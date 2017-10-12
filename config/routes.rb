@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       post '/signup', to: "users#signup"
       post '/login', to: "sessions#login"
       get '/videos', to: "videos#index"
+      resources :videos, only: [:index, :show, :create, :destroy]
     end
   end
 end
