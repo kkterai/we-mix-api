@@ -19,7 +19,7 @@ RSpec.describe 'Videos API', type: :request do
         it 'returns an array of videos in JSON' do
             json = JSON.parse(response.body, symbolize_names: true)
 
-            expect(json).not_to_be_empty
+            expect(json).not_to be_empty
             expect(json.size).to eq(10)
             
         end
