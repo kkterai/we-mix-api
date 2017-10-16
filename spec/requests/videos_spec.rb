@@ -5,6 +5,10 @@ RSpec.describe 'Videos API', type: :request do
     let!(:videos) { create_list(:video, 10) }
     let(:video_id) { videos.first.id }
 
+    # Tests for GET /api/v1/videos
+    # It should return a status code of 200
+    # It should also return an array of videos in JSON
+
     describe 'GET /api/v1/videos' do 
         before { get '/api/v1/videos' }
 
@@ -16,6 +20,7 @@ RSpec.describe 'Videos API', type: :request do
             json = JSON.parse(response.body, symbolize_names: true)
 
             expect(json).not_to_be_empty
+            expect(json.size).to eq(10)
             
         end
     end

@@ -9,7 +9,8 @@ class Api::V1::VideosController < ApplicationController
         # else 
         #     render json: { error: { message: 'You must have a valid token' }}, status: 500
         # end
-        render json: Video.all
+        @videos = Video.all
+        render json: @videos, status: 200
     end
 
     def show
