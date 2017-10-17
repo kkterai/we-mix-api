@@ -14,15 +14,16 @@ class Api::V1::VideosController < ApplicationController
     end
 
     def show
-        
+        video = Video.find_by(id: params[:id])
+        render json:
     end
 
     def create
-        video = Video.new(video_params)
+        @video = Video.new(video_params)
         if video.save
-            render json: , status: 201
+            render json: @video, status: 201
         else
-            render json: , status: 422
+            render json: @video, status: 422
         end
     end
 
@@ -33,7 +34,7 @@ class Api::V1::VideosController < ApplicationController
     private
 
     def video_params
-        params.require(:video).permit(:name, ...others)
+        params.require(:video).permit(:name, :video_URL, :track_title, :track_ID, :artist, :artist_ID, :album ,:album_ID, :album_thumb, :playlist_ID, :mood
     end
 
 end

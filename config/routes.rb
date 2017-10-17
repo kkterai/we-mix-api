@@ -4,7 +4,6 @@ Rails.application.routes.draw do
     namespace :v1 do
       post '/signup', to: "users#signup"
       post '/login', to: "sessions#login"
-      get '/videos', to: "videos#index"
       resources :videos, only: [:index, :show, :create, :destroy]
     end
   end
