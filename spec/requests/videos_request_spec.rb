@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Videos API', type: :request do
 
-    let!(:videos) { FactoryGirl.create_list(:video, 10) }
+    let!(:videos) { create_list(:video, 10) }
     let(:video_id) { videos.first.id }
 
     # Tests for GET /api/v1/videos
@@ -17,11 +17,11 @@ RSpec.describe 'Videos API', type: :request do
         end
 
         it 'returns an array of videos in JSON' do
-            # json=JSON.parse(response.body, symbolize_names: true)
+            json = JSON.parse(response.body, symbolize_names: true)
 
             expect(json).not_to be_empty
             expect(json.size).to eq(10)
-
+            
         end
     end
 
@@ -56,7 +56,7 @@ RSpec.describe 'Videos API', type: :request do
             end
 
             it "create a video and returns it in JSON"
-                # json=JSON.parse(response.body, symbolize_names: true)
+                json = JSON.parse(response.body, symbolize_names: true)
 
                 expect(json).not_to be_empty
                 expect(json[:id]).not_to eq(nil)
@@ -76,16 +76,32 @@ RSpec.describe 'Videos API', type: :request do
 
         context "when the request is invalid" do
             
-            before { post '/api/v1/videos', params: valid_attributes }
+            before { post '/api/v1/videos', params: {
+                video: {
+                    name: '',
+                    video_URL: '', 
+                    track_title: '',
+                    track_ID: '',
+                    artist: '',
+                    artist_ID: '',
+                    album: '',
+                    album_ID: '',
+                    album_thumb: '',
+                    playlist_ID: '',
+                    mood: ''
+                }
+            }
+        }
 
             it "returns a status code of 422" do
                 expect(response).to have_http_status(422)
             end
 
             it "returns the validation error messages in JSON" do
-                # json=JSON.parse(response.body, symbolize_names: true)
+                json = JSON.parse(response.body, symbolize_names: true)
 
                 expect(json).not_to be_empty
+     
                 expect(json[:errors][:messages]).to eq({
                     :name=>["can't be blank"]
                     #other attributes ["can't be blank]"]
@@ -125,4 +141,5 @@ RSpec.describe 'Videos API', type: :request do
 
     end
 
-#use RESTful to test submissions!
+#use RESTed to test submissions!
+end

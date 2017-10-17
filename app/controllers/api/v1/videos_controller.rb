@@ -15,7 +15,7 @@ class Api::V1::VideosController < ApplicationController
 
     def show
         video = Video.find_by(id: params[:id])
-        render json:
+        render json: video
     end
 
     def create
