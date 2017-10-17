@@ -18,11 +18,20 @@ class Api::V1::VideosController < ApplicationController
     end
 
     def create
-
+        video = Video.new(video_params)
+        if video.save
+            render json: , status: 201
+        end
     end
 
     def destroy
 
+    end
+
+    private
+
+    def video_params
+        params.require()
     end
 
 end
