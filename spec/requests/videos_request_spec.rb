@@ -51,6 +51,22 @@ RSpec.describe 'Videos API', type: :request do
             end
         end
         context "when the request is invalid"
+            
+        before { post '/api/v1/videos, params: valid_attributes' }
+
+            it "returns a status code of 422" do
+                expect(response).to have_http_status(422)
+            end
+
+            it "returns the validation error messages in JSON" do
+                json = JSON.parse(response.body, symbolize_names: true)
+
+                expect(json).not_to be_empty
+                expect(json[:errors][:messages]).to eq({
+                    :name=>["can't be blank"]
+                    #other attributes ["can't be blank]"]
+                })
+            end
     end
     # GET /api/v1/videos/:id
     #   Returna a Video Matching the Parameters ID
@@ -59,3 +75,6 @@ RSpec.describe 'Videos API', type: :request do
     # DELETE /api/v1/videos/:id
     #   Deletes the video matching the Parameters ID
 end
+
+
+#use RESTful to test submissions!
