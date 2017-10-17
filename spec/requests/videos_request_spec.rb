@@ -17,7 +17,6 @@ RSpec.describe 'Videos API', type: :request do
         end
 
         it 'returns an array of videos in JSON' do
-            json = JSON.parse(response.body, symbolize_names: true)
 
             expect(json).not_to be_empty
             expect(json.size).to eq(10)
@@ -45,7 +44,7 @@ RSpec.describe 'Videos API', type: :request do
             end
 
             it "create a video and returns it in JSON"
-                json= JSON.parse(response.body, symbolize_names: true)
+            
                 expect(json).not_to be_empty
                 expect(json[:id]).not_to eq(nil)
             end
@@ -59,7 +58,6 @@ RSpec.describe 'Videos API', type: :request do
             end
 
             it "returns the validation error messages in JSON" do
-                json = JSON.parse(response.body, symbolize_names: true)
 
                 expect(json).not_to be_empty
                 expect(json[:errors][:messages]).to eq({
@@ -70,11 +68,33 @@ RSpec.describe 'Videos API', type: :request do
     end
     # GET /api/v1/videos/:id
     #   Returna a Video Matching the Parameters ID
+
+    describe 'GET /api/v1/videos/:id' do
+
+        context 'if video exists' do
+
+        end
+
+        context 'if video does not exist' do
+
+        end
+        
+    end
+
+
     # PUT /api/v1/videos/:id
     #   Updates and Returns the video matching the Parameters ID
+
+
+    describe 'PUT /api/v1/videos/:id' do
+
+    end
+
     # DELETE /api/v1/videos/:id
     #   Deletes the video matching the Parameters ID
-end
 
+    describe `DELETE /api/v1/videos/:id` do
+
+    end
 
 #use RESTful to test submissions!
