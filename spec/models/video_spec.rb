@@ -4,6 +4,6 @@ require 'rails_helper'
    
     it { should have_many(:video_playlists) }
     it { should validate_presence_of(:video_URL) }
-    it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:track_title) }
     it { should validate_presence_of(:artist) }
 end

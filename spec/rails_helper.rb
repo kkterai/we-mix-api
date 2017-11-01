@@ -22,7 +22,7 @@ end
 
 RSpec.configure do |config|
 
-  FactoryGirl::Syntax::Methods
+  FactoryBot::Syntax::Methods
 
   #For Request Tests (E2E)
   config.include RequestSpecHelper, type: :request # <- Important!
