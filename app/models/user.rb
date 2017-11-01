@@ -1,6 +1,6 @@
 class User < ApplicationRecord
 
-    has_many :playlists
+    has_many :videos
     
     has_secure_password
 

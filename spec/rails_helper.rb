@@ -30,13 +30,13 @@ ActiveRecord::Migration.maintain_test_schema!
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
     with.test_framework :rspec
-    with.library :Rails
+    with.library :rails
   end
 end
 
 RSpec.configure do |config|
 
-  FactoryGirl::Syntax::Methods
+  FactoryBot::Syntax::Methods
 
   #For Request Tests (E2E)
   config.include RequestSpecHelper, type: :request # <- Important!

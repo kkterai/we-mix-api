@@ -1,6 +1,7 @@
 class Video < ApplicationRecord
 
-    has_many :playlists, through: :video_playlists
-    has_many :video_playlists
+    belongs_to :user, optional: true
+
+    validates :uuid, :track_title, :video_URL, presence: true
     
 end
