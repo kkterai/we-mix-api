@@ -5,3 +5,14 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+20.times do
+video = Video.create(
+    id: Faker::Number.number(2),
+    uuid: Faker::Lorem.word,
+    video_URL: Faker::Internet.url('example.com'), 
+    track_title: Faker::Ancient.primordial,
+    artist: Faker::Lorem.word,
+    artist_ID: Faker::Number.digit,
+    playlist_ID: Faker::Number.digit)
+end

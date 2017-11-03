@@ -5,7 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-
+# Webpacker
+gem 'webpacker'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.1'
 # Use sqlite3 as the database for Active Record
@@ -21,7 +22,7 @@ gem 'bcrypt', '~> 3.1', '>= 3.1.11'
 gem 'jwt', '~>1.5.6'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem 'rack-cors'
+gem 'rack-cors'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -29,13 +30,15 @@ group :development, :test do
   gem 'pry'
   gem 'rspec-rails', '~> 3.5'
   gem 'dotenv-rails'
+  gem 'faker'
+  gem 'factory_bot_rails'
+  gem 'database_cleaner'
 end
 
 group :test do
-  gem 'factory_bot_rails'
   gem 'shoulda-matchers', '~> 3.1'
-  gem 'faker'
-  gem 'database_cleaner'
+  gem 'capybara'
+  gem 'selenium-webdriver'
 end
 
 group :development do
