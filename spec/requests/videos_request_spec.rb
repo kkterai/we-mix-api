@@ -124,13 +124,105 @@ RSpec.describe 'Videos API', type: :request do
     #   Updates and Returns the video matching the Parameters ID
 
     describe 'PUT /api/v1/videos/:id' do
+        describe "if video exists" do
+            context "and has valid params" do
 
+                let(:valid_params) {
+                    {
+                        video: {
+                            video_URL: "Updated URL", 
+                            track_title: "Updated Title",
+                            artist: "Updated Artist Name"
+                        }
+                    }
+                }
+
+                before { put "/api/v1/videos/#{video_id}", params: valid_params }
+
+                it 'updates the video' do
+                    expect(json[:video_URL]).to eq(valid_params[:video][:video_URL])
+                    expect(json[:track_title]).to eq(valid_params[:video][:track_title])
+                    expect(json[:artist]).to eq(valid_params[:video][:artist])
+                end
+
+                it 'returns a status code of 200' do
+                    expect(response).to have_http_status(200)
+                end
+            end
+
+            context "and has invalid params" do
+                
+                let(:invalid_params) {
+                    {
+                        video: {
+                            video_URL: "", 
+                            track_title: "",
+                            artist: ""
+                        }
+                    }
+                }
+
+                before { put "/api/v1/videos/#{video_id}", params: invalid_params }
+
+                it "returns a status code of 422" do
+                    expect(response).to have_http_status(422)
+                end
+    
+                it "returns the validation error messages in JSON" do
+                    expect(json).not_to be_empty
+                    expect(json[:errors][:messages]).to eq({
+                        :video_URL=> ["can't be blank"],
+                        :track_title => ["can't be blank"]
+                    })
+                end
+            end
+        end
+
+        context "if video is not found" do
+
+            before { put "/api/v1/videos/10000" }
+
+            it 'returns a status code of 404' do
+                expect(response).to have_http_status(404)
+            end
+
+            it 'returns error messages if not found in JSON' do
+                expect(json).not_to be_empty
+                expect(json[:errors][:messages]).to eq({
+                    :video=> "Can't be found"
+                })
+            end
+        end
     end
 
     # DELETE /api/v1/videos/:id
-    #   Deletes the video matching the Parameters ID
+    #   Destroys the video matching the Parameters ID
 
     describe `DELETE /api/v1/videos/:id` do
 
+        context "if video exists" do
+
+            before { delete "/api/v1/videos/#{video_id}" }
+        
+            it 'returns a status code of 204' do
+                expect(response).to have_http_status(204)
+            end
+        end
+
+        context "if video is not found" do
+            
+            before { delete "/api/v1/videos/10000" }
+
+            it 'returns a status code of 404' do
+                expect(response).to have_http_status(404)
+            end
+
+            it 'returns error messages if not found in JSON' do
+                expect(json).not_to be_empty
+                expect(json[:errors][:messages]).to eq({
+                    :video=> "Can't be found"
+                })
+            end
+        end
     end
 end
