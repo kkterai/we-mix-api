@@ -17,11 +17,8 @@ RSpec.describe 'Videos API', type: :request do
         end
 
         it 'returns an array of videos in JSON' do
-            json = JSON.parse(response.body, symbolize_names: true)
-
             expect(json).not_to be_empty
-            expect(json.size).to eq(10)
-            
+            expect(json.size).to eq(10) 
         end
     end
 
@@ -29,9 +26,7 @@ RSpec.describe 'Videos API', type: :request do
     #   Creates a Video and Returns a new video
 
     describe 'POST /api/v1/videos' do
-
         context "when the request is valid" do
-
             let(:valid_attributes) {
                 {
                     video: {
@@ -51,8 +46,6 @@ RSpec.describe 'Videos API', type: :request do
             end
 
             it "creates a video and returns it in JSON" do
-                json = JSON.parse(response.body, symbolize_names: true)
-
                 expect(json).not_to be_empty
                 expect(json[:id]).not_to eq(nil)
                 expect(json[:uuid]).not_to eq(nil)
@@ -64,7 +57,6 @@ RSpec.describe 'Videos API', type: :request do
     end
         
     context "when the request is invalid" do
-            
             before { post '/api/v1/videos', params: {
                 video: {
                     uuid: '',
@@ -79,10 +71,7 @@ RSpec.describe 'Videos API', type: :request do
             end
 
             it "returns the validation error messages in JSON" do
-                json = JSON.parse(response.body, symbolize_names: true)
-
                 expect(json).not_to be_empty
-     
                 expect(json[:errors][:messages]).to eq({
                     :uuid=>["can't be blank"],
                     :video_URL=> ["can't be blank"],
@@ -91,18 +80,41 @@ RSpec.describe 'Videos API', type: :request do
             end
         end
 
-
     # GET /api/v1/videos/:id
     #   Returns a Video Matching the Parameters ID
 
     describe 'GET /api/v1/videos/:id' do
+        
+        context "if video exists" do
 
-        context 'if video exists' do
+            before { get "/api/v1/videos/#{video_id}" }
 
+            it 'returns a status code of 200' do
+                expect(response).to have_http_status(200)
+            end
+
+            it 'returns a video in JSON' do
+                expect(json).not_to be_empty
+                expect(json[:id]).to eq(video_id)
+                expect(json[:uuid]).to eq(videos.first.uuid)
+                expect(json[:video_URL]).to eq(videos.first.video_URL)
+                expect(json[:track_title]).to eq(videos.first.track_title)
+            end
         end
 
-        context 'if video does not exist' do
+        context "if video does not exist" do
+            before { get '/api/v1/videos/1000' }
 
+            it "returns a status code of 404" do
+                expect(response).to have_http_status(404)
+            end
+
+            it "returns the validation error messages in JSON" do
+                expect(json).not_to be_empty
+                expect(json[:errors][:messages]).to eq({
+                    :video=> "Can't be found"
+                })
+            end
         end
 
     end
@@ -110,7 +122,6 @@ RSpec.describe 'Videos API', type: :request do
 
     # PUT /api/v1/videos/:id
     #   Updates and Returns the video matching the Parameters ID
-
 
     describe 'PUT /api/v1/videos/:id' do
 
@@ -122,6 +133,4 @@ RSpec.describe 'Videos API', type: :request do
     describe `DELETE /api/v1/videos/:id` do
 
     end
-
-#use RESTed to test submissions!
 end
