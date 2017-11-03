@@ -67,11 +67,9 @@ RSpec.describe 'Videos API', type: :request do
             
             before { post '/api/v1/videos', params: {
                 video: {
-                    id: '',
                     uuid: '',
                     video_URL: '', 
-                    track_title: '',
-                    artist: ''
+                    track_title: ''
                 }
             }
         }
@@ -86,8 +84,9 @@ RSpec.describe 'Videos API', type: :request do
                 expect(json).not_to be_empty
      
                 expect(json[:errors][:messages]).to eq({
-                    :id=>["can't be blank"]
-                    #other attributes ["can't be blank]"]
+                    :uuid=>["can't be blank"],
+                    :video_URL=> ["can't be blank"],
+                    :track_title => ["can't be blank"]
                 })
             end
         end

@@ -23,7 +23,8 @@ class Api::V1::VideosController < ApplicationController
             if video.save
                 render json: video, status: 201
             else
-                render json: video, status: 422
+                render json: { errors: { messages: video.errors.messages } },
+                status: 422
             end
         end
     
@@ -34,7 +35,7 @@ class Api::V1::VideosController < ApplicationController
         private
     
         def video_params
-            params.permit(:uuid, :video_URL, :track_title, :artist)
+            params.require(:video).permit(:uuid, :video_URL, :track_title, :artist)
         end
     
     end
