@@ -21,5 +21,9 @@ module WeMixApi
     config.load_defaults 5.1
     config.api_only = true
     config.autoload_paths << Rails.root.join('lib')
+    config.generators do |g|
+      g.orm :active_record, primary_key_type: :uuid
+      g.orm :active_record, foreign_key_type: :uuid
+    end
   end
 end
