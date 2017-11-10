@@ -31,7 +31,6 @@ RSpec.describe 'Videos API', type: :request do
                 {
                     video: {
                         id: Faker::Number.digit,
-                        uuid: Faker::Number.digit,
                         video_URL: Faker::Internet.url('example.com'), 
                         track_title: Faker::Ancient.primordial,
                         artist: Faker::Lorem.word
@@ -48,7 +47,6 @@ RSpec.describe 'Videos API', type: :request do
             it "creates a video and returns it in JSON" do
                 expect(json).not_to be_empty
                 expect(json[:id]).not_to eq(nil)
-                expect(json[:uuid]).not_to eq(nil)
                 expect(json[:video_URL]).to eq(valid_attributes[:video][:video_URL])
                 expect(json[:track_title]).to eq(valid_attributes[:video][:track_title])
                 expect(json[:artist]).to eq(valid_attributes[:video][:artist])
@@ -59,7 +57,6 @@ RSpec.describe 'Videos API', type: :request do
     context "when the request is invalid" do
             before { post '/api/v1/videos', params: {
                 video: {
-                    uuid: '',
                     video_URL: '', 
                     track_title: ''
                 }
@@ -73,7 +70,6 @@ RSpec.describe 'Videos API', type: :request do
             it "returns the validation error messages in JSON" do
                 expect(json).not_to be_empty
                 expect(json[:errors][:messages]).to eq({
-                    :uuid=>["can't be blank"],
                     :video_URL=> ["can't be blank"],
                     :track_title => ["can't be blank"]
                 })
@@ -96,7 +92,6 @@ RSpec.describe 'Videos API', type: :request do
             it 'returns a video in JSON' do
                 expect(json).not_to be_empty
                 expect(json[:id]).to eq(video_id)
-                expect(json[:uuid]).to eq(videos.first.uuid)
                 expect(json[:video_URL]).to eq(videos.first.video_URL)
                 expect(json[:track_title]).to eq(videos.first.track_title)
             end

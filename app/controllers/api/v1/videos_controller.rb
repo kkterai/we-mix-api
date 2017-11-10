@@ -5,14 +5,13 @@ class Api::V1::VideosController < ApplicationController
         before_action :set_video, only: [:show, :update, :destroy]
 
         def index
-            # token=request.env["HTTP_AUTHORIZATION"]
-            # if token && Auth.decode_token(token)
-            #     render json: Video.all
-            # else 
-            #     render json: { error: { message: 'You must have a valid token' }}, status: 500
-            # end
-            videos = Video.all
-            render json: videos, status: 200
+            token=request.env["HTTP_AUTHORIZATION"]
+            binding.pry
+            if token && Auth.decode_token(token)
+                render json: Video.all
+            else 
+                render json: { error: { message: 'You must have a valid token' }}, status: 500
+            end
         end
 
         def create
@@ -65,7 +64,7 @@ class Api::V1::VideosController < ApplicationController
         end
 
         def video_params
-            params.require(:video).permit(:uuid, :video_URL, :track_title, :artist)
+            params.require(:video).permit(:video_URL, :track_title, :artist)
         end
     
     end
