@@ -3,12 +3,12 @@ require 'Auth'
 class Api::V1::VideosController < ApplicationController
     
         before_action :set_video, only: [:show, :update, :destroy]
+        before_action :set_user
 
         def index
-            token=request.env["HTTP_AUTHORIZATION"]
-            binding.pry
-            if token && Auth.decode_token(token)
-                render json: Video.all
+            if @token && @user_id
+                user = User.find_by(id: @user_id)
+                render json: user.videos
             else 
                 render json: { error: { message: 'You must have a valid token' }}, status: 500
             end
@@ -16,6 +16,8 @@ class Api::V1::VideosController < ApplicationController
 
         def create
             @video = Video.new(video_params)
+            @video.build_user
+            @video.user = User.find_by(id: @user_id)
             if @video.save
                 render json: @video, status: 201
             else
@@ -43,6 +45,11 @@ class Api::V1::VideosController < ApplicationController
         end
     
         private
+
+        def set_user
+            @token=request.authorization
+            @user_id= Auth.decode_token(@token)[0]["user"]["id"]
+        end
 
         def render_errors_in_json
             render json: { 
