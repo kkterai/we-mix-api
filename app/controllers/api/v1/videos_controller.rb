@@ -32,6 +32,7 @@ class Api::V1::VideosController < ApplicationController
         end
     
         def update
+            binding.pry
             if @video.update(video_params)
                 render json: @video
             else
@@ -75,7 +76,7 @@ class Api::V1::VideosController < ApplicationController
         end
 
         def video_params
-            params.require(:video).permit(:video_URL, :track_title, :artist)
+            params.require(:video).permit(:video_URL, :track_title, :artist, :id)
         end
     
     end
