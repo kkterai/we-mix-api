@@ -32,7 +32,6 @@ class Api::V1::VideosController < ApplicationController
         end
     
         def update
-            binding.pry
             if @video.update(video_params)
                 render json: @video
             else
