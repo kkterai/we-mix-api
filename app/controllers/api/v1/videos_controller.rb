@@ -25,12 +25,6 @@ class Api::V1::VideosController < ApplicationController
             end
         end
     
-        def show
-            if @video
-                render json: @video, status: 200
-            end
-        end
-    
         def update
             if @video.update(video_params)
                 render json: @video
