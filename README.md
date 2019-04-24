@@ -12,7 +12,7 @@ Step by step series of examples and explanations about how to get a development 
 ## Tests
 Describe and show how to run the tests.
 
-##Guide to use the project
+## Guide to use the project
 
 * Ruby version
 
