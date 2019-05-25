@@ -8,7 +8,8 @@ class Auth
     end
 
     def self.decode_token(token)
-        JWT.decode(token, Rails.application.secrets.secret_key_base, true, { algorithm: 'HS256' })
+        body = JWT.decode(token, Rails.application.secrets.secret_key_base, true, { algorithm: 'HS256' })
+        HashWithIndifferentAccess.new(body)
     end
 
 end
