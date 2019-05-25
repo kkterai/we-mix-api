@@ -77,5 +77,11 @@ class Api::V1::VideosController < ApplicationController
         def video_params
             params.require(:video).permit(:video_URL, :track_title, :artist, :id)
         end
+
+        private
+        
+            def not_authorized
+                render json: { error: 'Not authorized' }, status: :unauthorized
+            end
     
     end
