@@ -21,7 +21,7 @@ class Api::V1::VideosController < ApplicationController
             if @video.save
                 render json: @video, status: 201
             else
-               render_errors_in_json 
+                render_errors_in_json 
             end
         end
     
@@ -35,7 +35,7 @@ class Api::V1::VideosController < ApplicationController
             if @video.update(video_params)
                 render json: @video
             else
-               render_errors_in_json
+                render_errors_in_json
             end
         end
     
@@ -49,6 +49,7 @@ class Api::V1::VideosController < ApplicationController
         def set_user
             if request.authorization
                 @token=request.authorization
+                binding.pry
                 @user_id= Auth.decode_token(@token)[0]["user"]["id"]
             else 
                 render json: { error: { message: 'You must have a valid token' }}, status: 500
