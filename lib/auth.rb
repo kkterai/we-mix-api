@@ -4,11 +4,12 @@ class Auth
 
     def self.create_token(user_object)
         payload = { user: user_object }
-        JWT.encode(payload, Rails.application.secrets.secret_key_base, 'HS256') 
+        JWT.encode(payload, ENV["AUTH_SECRET"], ENV["AUTH_ALGORITHM"]) 
+        binding.pry
     end
 
     def self.decode_token(token)
-        body = JWT.decode(token, Rails.application.secrets.secret_key_base, true, { algorithm: 'HS256' })
+        body = JWT.decode(token, ENV["AUTH_SECRET"], true, { algorithm: ENV["AUTH_ALGORITHM"] })
         HashWithIndifferentAccess.new(body)
     end
 
